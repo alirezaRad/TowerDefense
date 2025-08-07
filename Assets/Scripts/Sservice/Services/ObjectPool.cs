@@ -1,19 +1,22 @@
+using System;
 using System.Collections.Generic;
 using Enums;
 using ScriptableObjects;
+using Sservice;
 using UnityEngine;
 
 namespace Service
 {
 
-    public class ObjectPool : MonoBehaviour
+    public class ObjectPool : MonoBehaviour,IService
     {
         public PooledObjectConfig config;
   
         private readonly Dictionary<PoolObjectType, Queue<GameObject>> _poolDictionary = new();
         private readonly Dictionary<PoolObjectType, Transform> _parentDictionary = new();
 
-        void Start()
+
+        public void Start()
         {
             ServiceLocator.Get<EventManager>().Subscribe(GameEventType.GameStart, CreatePool);
         }
@@ -63,6 +66,10 @@ namespace Service
             obj.SetActive(false);
             obj.transform.SetParent(_parentDictionary[key]);
             _poolDictionary[key].Enqueue(obj);
+        }
+
+        public void Load()
+        {
         }
     }
 

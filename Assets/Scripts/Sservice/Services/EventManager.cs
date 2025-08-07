@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Enums;
+using Sservice;
 using UnityEngine;
 
 
 
-public class EventManager : MonoBehaviour
+public class EventManager : MonoBehaviour,IService
 {
     private Dictionary<GameEventType, Action> eventDictionary = new();
 
@@ -48,5 +49,9 @@ public class EventManager : MonoBehaviour
         {
             Debug.LogWarning($"No listeners found for event {eventType}");
         }
+    }
+
+    public void Load()
+    {
     }
 }
