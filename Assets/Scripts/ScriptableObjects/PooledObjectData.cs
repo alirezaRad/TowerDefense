@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ScriptableObjects
 {
     [CreateAssetMenu(fileName = "PooledObjectData", menuName = "ScriptableObjects/ObjectPoolData")]
-    public class PooledObjectConfig : ScriptableObject
+    public class PooledObjectData : ScriptableObject
     {
         public List<PoolItem> items;
     }

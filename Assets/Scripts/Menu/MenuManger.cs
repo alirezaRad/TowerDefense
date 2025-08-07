@@ -1,3 +1,4 @@
+using System.Collections;
 using Enums;
 using Service;
 using UnityEngine;
@@ -10,9 +11,17 @@ namespace Menu
         public void PlayGame()
         {
             ServiceLocator.Get<AudioManager>().PlaySfx(AudioClipType.ButtonClick);
-            SceneManager.LoadScene("GameScene", LoadSceneMode.Additive);
+            StartCoroutine(LoadGameScene());
+        }
+        private IEnumerator LoadGameScene()
+        {
+            AsyncOperation loadGameLogic = SceneManager.LoadSceneAsync("GameLogicScene", LoadSceneMode.Additive);
+            AsyncOperation loadGameUI = SceneManager.LoadSceneAsync("GameUIScene", LoadSceneMode.Additive);
+            while (!loadGameLogic.isDone || !loadGameUI.isDone)
+                yield return null;
             ServiceLocator.Get<EventManager>().Raise(GameEventType.GameStart);
             SceneManager.UnloadSceneAsync("Menu");
         }
+
     }
 }

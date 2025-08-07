@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf68b3bf-217e-4f86-a672-f711d6491fdf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Sservice/Services/CameraScaler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Sservice/Services/CameraScaler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/TowerSpot.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GamePlay/TowerSpot.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefense/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/BootStrap.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BootStrap.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BootStrap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BootStrap.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +113,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754552449196</updated>
       <workItem from="1754552449580" duration="8990000" />
-      <workItem from="1754561791522" duration="7315000" />
+      <workItem from="1754561791522" duration="8626000" />
     </task>
     <servers />
   </component>
