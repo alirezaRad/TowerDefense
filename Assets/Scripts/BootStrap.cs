@@ -15,6 +15,7 @@ public class Bootstrap : MonoBehaviour
         LoadServices(services);
         SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
         ServiceLocator.Get<AudioManager>().PlayMusic(AudioClipType.Music);
+        ServiceLocator.Get<CameraScaler>().FitCameraToScreen(2400f,1080f,5f);
     }
 
     private void LoadServices(List<IService> services)
