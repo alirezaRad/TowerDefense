@@ -3,6 +3,7 @@ using Enums;
 using NaughtyAttributes;
 using Service;
 using UnityEngine;
+using UnityEngine.Serialization;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -21,18 +22,18 @@ namespace GamePlay
             ServiceLocator.Get<WaveManager>().RegisterWaypointPath(this);
         }
 
-        public int Count => _points != null ? _points.Length : 0;
+        public int count => points != null ? points.Length : 0;
         
-        [SerializeField] private Transform[] _points;
+        [SerializeField] private Transform[] points;
         [SerializeField] private bool showGizmos = true;
         [SerializeField] private float gizmoSphereRadius = 0.25f;
         
         public void CollectChildrenAsPoints()
         {
             int childCount = transform.childCount;
-            _points = new Transform[childCount];
+            points = new Transform[childCount];
             for (int i = 0; i < childCount; i++)
-                _points[i] = transform.GetChild(i);
+                points[i] = transform.GetChild(i);
         }
 
         [Button]
@@ -43,23 +44,23 @@ namespace GamePlay
         
         public Transform GetPoint(int index)
         {
-            if (_points == null || _points.Length == 0) return null;
-            index = Mathf.Clamp(index, 0, _points.Length - 1);
-            return _points[index];
+            if (points == null || points.Length == 0) return null;
+            index = Mathf.Clamp(index, 0, points.Length - 1);
+            return points[index];
         }
 
         private void OnDrawGizmos()
         {
-            if (!showGizmos || _points == null || _points.Length == 0) return;
+            if (!showGizmos || points == null || points.Length == 0) return;
             Gizmos.matrix = transform.localToWorldMatrix;
             
-            for (int i = 0; i < _points.Length; i++)
+            for (int i = 0; i < points.Length; i++)
             {
-                if (_points[i] == null) continue;
+                if (points[i] == null) continue;
                 
-                Gizmos.DrawSphere(_points[i].localPosition, gizmoSphereRadius);
-                if (i < _points.Length - 1 && _points[i + 1] != null)
-                    Gizmos.DrawLine(_points[i].localPosition, _points[i + 1].localPosition);
+                Gizmos.DrawSphere(points[i].localPosition, gizmoSphereRadius);
+                if (i < points.Length - 1 && points[i + 1] != null)
+                    Gizmos.DrawLine(points[i].localPosition, points[i + 1].localPosition);
             }
         }
     }

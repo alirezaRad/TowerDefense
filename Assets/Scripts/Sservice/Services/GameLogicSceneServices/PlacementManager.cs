@@ -32,10 +32,14 @@ namespace Service
         public void PlacementEnd(Transform placementTarget)
         {
             ServiceLocator.Get<ResourceManager>().ReduceTowerMoney(_selectedTowerType);
+            
+            //create tower
             var tower = ServiceLocator.Get<ObjectPool>().GetFromPool(PoolObjectType.Tower);
             tower.transform.position = placementTarget.transform.position;
             tower.transform.parent = placementTarget;
             tower.GetComponent<Tower>().Init(_selectedTowerType);
+            
+            //back to normal
             _placementState = PlacementState.Idle;
             ServiceLocator.Get<EventManager>().Raise(GameEventType.PlacementEnd);
         }

@@ -74,10 +74,10 @@ namespace Service
         }
         
 
-        public void RegisterWaypointPath(WaypointPath waypointPath)
+        public void RegisterWaypointPath(WaypointPath waypointPathValue)
         {
             if(_waypointPath == null)
-                _waypointPath = waypointPath;
+                _waypointPath = waypointPathValue;
             else
                 Debug.LogError("Already registered waypointPath");
         }

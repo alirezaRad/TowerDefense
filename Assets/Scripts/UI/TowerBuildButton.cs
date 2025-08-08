@@ -17,11 +17,14 @@ namespace UI
         private int _price;
         private TowerType _towerType;
 
+        
         private void Awake()
         {
             _thisButton = GetComponent<Button>();
             _thisButton.interactable = false;
             _thisButton.onClick.AddListener(ClickOnThis);
+            
+            //dont subcribe event in awake (except this one ;) ) 
             ServiceLocator.Get<EventManager>().Subscribe(GameEventType.ResourceChange,CheckForActivation);
             ServiceLocator.Get<EventManager>().Subscribe(GameEventType.PlacementStart, ()=>
                 {gameObject.SetActive(false);});
