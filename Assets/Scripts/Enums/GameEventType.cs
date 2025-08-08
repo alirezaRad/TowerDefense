@@ -5,5 +5,6 @@ namespace Enums
         GameStart,
         ResourceChange,
         GameEnd,
+        RegisterGamePlayService
     }
 }

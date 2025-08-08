@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Enums;
 using ScriptableObjects;
 using Sservice;
@@ -5,9 +6,9 @@ using UnityEngine;
 
 namespace Service
 {
-    public class ResourceManager : MonoBehaviour,IService
+    public class TowersDataManager: MonoBehaviour,IService
     {
-        [SerializeField] private ResourceData resouceData;
+        [SerializeField] private TowersData towersData;
         public void Start()
         {
             ServiceLocator.Get<EventManager>().Subscribe(GameEventType.RegisterGamePlayService,Register);
@@ -15,14 +16,14 @@ namespace Service
 
         private void Register()
         {
-            ServiceLocator.Register(typeof(ResourceManager),this);
+            ServiceLocator.Register(typeof(TowersDataManager),this);
         }
         
         public void Load()
         {
         }
-        
-        public int life { get { return resouceData.life; }}
-        public int money { get { return resouceData.money; }}
+
+        public List<TowerDataStruct> TowersDataGetter => towersData.towerData;
+
     }
 }

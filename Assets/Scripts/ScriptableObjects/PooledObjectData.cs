@@ -11,7 +11,7 @@ namespace ScriptableObjects
     }
 
     [System.Serializable]
-    public class PoolItem
+    public struct PoolItem
     {
         public PoolObjectType key;
         public GameObject prefab;

@@ -1,7 +1,7 @@
-using System;
+
+using System.Collections.Generic;
 using Enums;
 using ScriptableObjects;
-using Service.Services.GameLogicSceneServices;
 using Sservice;
 using TMPro;
 using UI;
@@ -17,7 +17,9 @@ namespace Service
         
         public void Start()
         {
-            ServiceLocator.Get<EventManager>().Subscribe(GameEventType.GameStart,Register);
+            ServiceLocator.Get<EventManager>().Subscribe(GameEventType.RegisterGamePlayService,Register);
+            ServiceLocator.Get<EventManager>().Subscribe(GameEventType.GameStart,BuildTowerButtonsCreate);
+            ServiceLocator.Get<EventManager>().Subscribe(GameEventType.GameStart,UpdateResource);
             ServiceLocator.Get<EventManager>().Subscribe(GameEventType.ResourceChange,UpdateResource);
         }
 
@@ -30,6 +32,18 @@ namespace Service
         {
             lifeText.text = ServiceLocator.Get<ResourceManager>().life.ToString();
             moneyText.text = ServiceLocator.Get<ResourceManager>().money.ToString();
+        }
+
+        private void BuildTowerButtonsCreate()
+        {
+            List<TowerDataStruct> towersData = ServiceLocator.Get<TowersDataManager>().TowersDataGetter;
+            foreach (var item in towersData)
+            {
+                Transform parent = buildTowerButtonTemplate.transform.parent;
+                var temp = Instantiate(buildTowerButtonTemplate, parent);
+                temp.gameObject.SetActive(true);
+                temp.Init(item.sprite,item.price);
+            }
         }
 
         public void Load()
