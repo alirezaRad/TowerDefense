@@ -5,6 +5,9 @@ namespace Enums
         GameStart,
         ResourceChange,
         GameEnd,
-        RegisterGamePlayService
+        RegisterGamePlayService,
+        PlacementStart,
+        PlacementEnd,
+        PlacementCancel
     }
 }

@@ -15,7 +15,10 @@ MonoBehaviour:
   towerData:
   - sprite: {fileID: -2960138565115590475, guid: b6f802acb53b09c4e8c62ed9b82a5361, type: 3}
     price: 100
+    towerType: 0
   - sprite: {fileID: -6809907661698028246, guid: 32227aa87ab28104392e6f6d5763c88c, type: 3}
     price: 200
+    towerType: 1
   - sprite: {fileID: 4393558011857041481, guid: 2b753e13603413d44a56e94fb97c3b4a, type: 3}
     price: 300
+    towerType: 2

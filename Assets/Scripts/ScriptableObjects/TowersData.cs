@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Enums;
 using NaughtyAttributes;
 using UnityEngine;
 namespace ScriptableObjects
@@ -15,6 +16,7 @@ namespace ScriptableObjects
         [ShowAssetPreview]
         public Sprite sprite;
         public int price;
+        public TowerType towerType;
     }
     
 }

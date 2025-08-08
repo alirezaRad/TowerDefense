@@ -1,3 +1,4 @@
+using System.Linq;
 using Enums;
 using ScriptableObjects;
 using Sservice;
@@ -7,6 +8,9 @@ namespace Service
 {
     public class ResourceManager : MonoBehaviour,IService
     {
+        public int life { get { return resouceData.life; }}
+        public int money { get { return resouceData.money; }}
+        
         [SerializeField] private ResourceData resouceData;
         public void Start()
         {
@@ -22,7 +26,14 @@ namespace Service
         {
         }
         
-        public int life { get { return resouceData.life; }}
-        public int money { get { return resouceData.money; }}
+
+
+        public void ReduceTowerMoney(TowerType towerType)
+        {
+            resouceData.money -= ServiceLocator.Get<TowersDataManager>().TowersDataGetter
+                .FirstOrDefault(t => t.towerType == towerType).price;
+            
+            ServiceLocator.Get<EventManager>().Raise(GameEventType.ResourceChange);
+        }
     }
 }

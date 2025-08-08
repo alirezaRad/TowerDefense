@@ -42,7 +42,7 @@ namespace Service
                 Transform parent = buildTowerButtonTemplate.transform.parent;
                 var temp = Instantiate(buildTowerButtonTemplate, parent);
                 temp.gameObject.SetActive(true);
-                temp.Init(item.sprite,item.price);
+                temp.Init(item.sprite,item.price,item.towerType);
             }
             ServiceLocator.Get<EventManager>().Raise(GameEventType.ResourceChange);
         }
