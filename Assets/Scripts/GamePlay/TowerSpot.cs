@@ -24,6 +24,11 @@ namespace GamePlay
         {
             if (ServiceLocator.Get<PlacementManager>().PlacementState == PlacementState.Placing)
             {
+                if (!_isEmpty)
+                {
+                    ServiceLocator.Get<GameUIManager>().ShowMessage("Try Empty Tower Spot",1.5f);
+                    return;
+                }
                 ServiceLocator.Get<AudioManager>().PlaySfx(AudioClipType.ButtonClick);
                 _isEmpty = false;
                 ServiceLocator.Get<PlacementManager>().PlacementEnd(transform);
@@ -43,9 +48,9 @@ namespace GamePlay
             if (_isEmpty)
             {
                 _spriteRenderer.color = new Color(1f, 1f, 1f, 0.3f);
+                _thisButton.interactable = false;
             }
 
-            _thisButton.interactable = false;
         }
         private void Activate()
         {

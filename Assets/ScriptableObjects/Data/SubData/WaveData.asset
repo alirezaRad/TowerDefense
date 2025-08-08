@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43165a1c8c84f43b21b9b2aeff336e6, type: 3}
   m_Name: WaveData
   m_EditorClassIdentifier: 
-  delayBetweenWaves: 5
+  delayBetweenWaves: 20
   subWaves:
   - subWaveData:
     - enemyType: 0

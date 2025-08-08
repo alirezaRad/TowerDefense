@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Enums;
 using GamePlay;
@@ -35,8 +36,11 @@ namespace Service
         
         IEnumerator RunWaves()
         {
+            int waveIndex = 0;
             foreach (var wave in waveData.subWaves)
             {
+                waveIndex++;
+                ServiceLocator.Get<GameUIManager>().ShowMessage($"Wave {waveIndex} Start",3);
                 foreach (var subWave in wave.subWaveData)
                 {
                     yield return new WaitForSeconds(wave.delayBetweenSubWaves);
@@ -49,7 +53,26 @@ namespace Service
                 
                 yield return new WaitForSeconds(waveData.delayBetweenWaves);
             }
+
+            StartCoroutine(CheckForWin());
         }
+        
+
+        IEnumerator CheckForWin()
+        {
+            while (true)
+            {
+                if (_enemySpawner.enemies[0] == null)
+                {
+                    ServiceLocator.Get<EventManager>().Raise(GameEventType.GameWin);
+                    break;
+                }
+                
+                yield return new WaitForSeconds(5f);
+            }
+
+        }
+        
 
         public void RegisterWaypointPath(WaypointPath waypointPath)
         {

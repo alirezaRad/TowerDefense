@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using Enums;
 using ScriptableObjects;
@@ -38,6 +39,7 @@ namespace Service
         {
             Time.timeScale = 0;
             winOrLosePanel.SetActive(true);
+            messageText.color = Color.white;
             messageText.text = message;
             messageText.gameObject.SetActive(true);
         }
@@ -65,6 +67,26 @@ namespace Service
                 temp.Init(item.sprite,item.price,item.towerType);
             }
             ServiceLocator.Get<EventManager>().Raise(GameEventType.ResourceChange);
+        }
+        public void ShowMessage(string text, float duration)
+        {
+            StartCoroutine(ShowAndPulseMessageCoroutine(text, duration,Color.black));
+        }
+
+        private IEnumerator ShowAndPulseMessageCoroutine(string text, float duration,Color color)
+        {
+            messageText.color = color;
+            messageText.text = text;
+            messageText.gameObject.SetActive(true);
+            float timer = 0f;
+            while (timer < duration)
+            {
+                float scale = 1f + Mathf.Sin(Time.unscaledTime * 10) * 0.1f;
+                messageText.transform.localScale = new Vector3(scale, scale, 1f);
+                timer += Time.unscaledDeltaTime;
+                yield return null;
+            }
+            messageText.gameObject.SetActive(false);
         }
 
         public void Load()
