@@ -25,6 +25,7 @@ namespace GamePlay
         private int _damage;
         private Sprite _bulletSprite;
         private AudioClipType _shootSound;
+        private Vector3 _basePosition;
 
 
         private void Awake()
@@ -47,6 +48,8 @@ namespace GamePlay
             _bulletSpeed = towerData.bulletSpeed;
             _bulletSprite = towerData.bulletSprite;
             _shootSound = towerData.shootSound;
+            var waypointPath = ServiceLocator.Get<WaveManager>().waypointPath;
+            _basePosition = waypointPath.GetPoint(waypointPath.Count - 1).position;
 
 
         }
@@ -79,7 +82,8 @@ namespace GamePlay
             foreach (Enemy enemy in enemies)
             {
                 float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                if (distanceToEnemy < shortestDistance && distanceToEnemy <= _range)
+                float enemyDistanceToBase = Vector3.Distance(_basePosition, enemy.transform.position);
+                if (enemyDistanceToBase < shortestDistance && distanceToEnemy <= _range)
                 {
                     shortestDistance = distanceToEnemy;
                     nearestEnemy = enemy;

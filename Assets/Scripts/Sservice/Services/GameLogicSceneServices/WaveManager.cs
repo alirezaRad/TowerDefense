@@ -62,7 +62,7 @@ namespace Service
         {
             while (true)
             {
-                if (_enemySpawner.enemies[0] == null)
+                if (_enemySpawner.enemies.Count == 0)
                 {
                     ServiceLocator.Get<EventManager>().Raise(GameEventType.GameWin);
                     break;
