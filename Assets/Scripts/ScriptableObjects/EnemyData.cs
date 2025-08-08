@@ -18,6 +18,7 @@ namespace ScriptableObjects
         public int health;
         public float speed;
         public EnemyType enemyType;
+        public int givenMoneyAfterDeath;
     }
     
 }

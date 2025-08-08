@@ -5,5 +5,6 @@ namespace Enums
         Bullet,
         Enemy,
         Tower,
+        HeathBar
     }
 }

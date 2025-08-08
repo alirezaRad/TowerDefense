@@ -52,6 +52,7 @@ namespace GamePlay
                 {
                     //reduce Life
                     ServiceLocator.Get<ResourceManager>().ReduceLife();
+                    ServiceLocator.Get<HealthBarManager>().RemoveHealthBar(transform);
                     ServiceLocator.Get<ObjectPool>().ReturnToPool(PoolObjectType.Enemy, gameObject);
                 }
             }
@@ -59,9 +60,11 @@ namespace GamePlay
 
         public void Init(EnemyType enemyType)
         {
+            ServiceLocator.Get<HealthBarManager>().CreateHealthBar(gameObject.transform);
+            
             var enemyData = ServiceLocator.Get<EnemyDataManger>().EnemyDataGetter
                 .FirstOrDefault(a => a.enemyType == enemyType);
-            ;
+            
             _health = enemyData.health;
             _speed = enemyData.speed;
             _spriteRenderer.sprite = enemyData.sprite;

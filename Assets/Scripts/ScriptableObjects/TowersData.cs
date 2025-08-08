@@ -17,6 +17,13 @@ namespace ScriptableObjects
         public Sprite sprite;
         public int price;
         public TowerType towerType;
+        public float range;
+        public float turnSpeed;
+        public float delayBetweenShoot;
+        [ShowAssetPreview]
+        public Sprite bulletSprite;
+        public int damage;
+        public float bulletSpeed;
     }
     
 }
