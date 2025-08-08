@@ -17,6 +17,7 @@ namespace Menu
         {
             AsyncOperation loadGameLogic = SceneManager.LoadSceneAsync("GameLogicScene", LoadSceneMode.Additive);
             AsyncOperation loadGameUI = SceneManager.LoadSceneAsync("GameUIScene", LoadSceneMode.Additive);
+            
             while (!loadGameLogic.isDone || !loadGameUI.isDone)
                 yield return null;
             

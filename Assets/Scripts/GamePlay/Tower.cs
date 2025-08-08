@@ -35,7 +35,7 @@ namespace GamePlay
 
         public void Init(TowerType towerType)
         {
-            
+            //Data Load 
             var towerData = ServiceLocator.Get<TowersDataManager>().TowersDataGetter
                 .FirstOrDefault(t => t.towerType == towerType);
             _spriteRenderer.sprite = towerData.sprite;

@@ -78,17 +78,15 @@ namespace GamePlay
 
         public void Init(EnemyType enemyType)
         {
+            //Data Load
             _healthBarManager = ServiceLocator.Get<HealthBarManager>();
             
             var enemyData = ServiceLocator.Get<EnemyDataManger>().EnemyDataGetter
                 .FirstOrDefault(a => a.enemyType == enemyType);
-
             _givenMoneyOnDie = enemyData.givenMoneyAfterDeath;
             _health = enemyData.health;
             _speed = enemyData.speed;
             _spriteRenderer.sprite = enemyData.sprite;
-            
-            
             _healthBarManager.CreateHealthBar(gameObject.transform,_health);
             _path = ServiceLocator.Get<WaveManager>().waypointPath;
             if (_path == null)
@@ -98,6 +96,7 @@ namespace GamePlay
                 return;
             }
             
+            //for Start 
             _currentIndex = 0;
             var startPoint = _path.GetPoint(_currentIndex);
             if (startPoint != null)
