@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Linq;
+using Enums;
 using Service;
 using UnityEngine;
 
@@ -11,21 +14,12 @@ namespace GamePlay
         private int _currentIndex = 0;
         private float _speed = 3f;
         private float _arriveThreshold = 0.2f;
+        private int _health;
+        private SpriteRenderer _spriteRenderer;
 
-        void Start()
+        private void Awake()
         {
-            _path = ServiceLocator.Get<WaveManager>().waypointPath;
-            if (_path == null)
-            {
-                Debug.LogError("Enemy: No WaypointPath assigned.");
-                enabled = false;
-                return;
-            }
-            
-            _currentIndex = 0;
-            var startPoint = _path.GetPoint(_currentIndex);
-            if (startPoint != null)
-                transform.position = startPoint.position;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         void Update()
@@ -57,9 +51,34 @@ namespace GamePlay
                 if (_currentIndex >= _path.Count)
                 {
                     //reduce Life
-                    Destroy(this.gameObject);
+                    ServiceLocator.Get<ResourceManager>().ReduceLife();
+                    ServiceLocator.Get<ObjectPool>().ReturnToPool(PoolObjectType.Enemy, gameObject);
                 }
             }
+        }
+
+        public void Init(EnemyType enemyType)
+        {
+            var enemyData = ServiceLocator.Get<EnemyDataManger>().EnemyDataGetter
+                .FirstOrDefault(a => a.enemyType == enemyType);
+            ;
+            _health = enemyData.health;
+            _speed = enemyData.speed;
+            _spriteRenderer.sprite = enemyData.sprite;
+            
+            
+            _path = ServiceLocator.Get<WaveManager>().waypointPath;
+            if (_path == null)
+            {
+                Debug.LogError("Enemy: No WaypointPath assigned.");
+                enabled = false;
+                return;
+            }
+            
+            _currentIndex = 0;
+            var startPoint = _path.GetPoint(_currentIndex);
+            if (startPoint != null)
+                transform.position = startPoint.position;
         }
     }
 }

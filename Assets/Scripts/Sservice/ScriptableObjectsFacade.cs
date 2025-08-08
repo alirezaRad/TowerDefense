@@ -13,8 +13,9 @@ namespace Service
         [HideInInspector]public ResourceData resourceData => entry.resourceData;
         [HideInInspector]public TowersData towersData => entry.towersData;
         [HideInInspector]public WaveData waveData => entry.waveData;
-        
-        
+        [HideInInspector]public EnemyData enemyData => entry.enemyData;
+
+
         public void Load()
         {
         }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8695ffd106cd442fbbccc75096873515, type: 3}
   m_Name: ResourceData
   m_EditorClassIdentifier: 
-  life: 10
+  life: 9990
   money: 5000

@@ -17,3 +17,4 @@ MonoBehaviour:
   resourceData: {fileID: 11400000, guid: 51c956eac0fa8484bb99a75d331813ed, type: 2}
   towersData: {fileID: 11400000, guid: 8d93c01e880e48b42aed9f7e9c35ca92, type: 2}
   waveData: {fileID: 11400000, guid: 4da9a8a89bd585746a840427983bd8ea, type: 2}
+  enemyData: {fileID: 11400000, guid: cf7e2db2663f8b64d86bfa706c72554e, type: 2}

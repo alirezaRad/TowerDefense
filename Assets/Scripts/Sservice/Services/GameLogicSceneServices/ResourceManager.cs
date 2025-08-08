@@ -35,5 +35,14 @@ namespace Service
             
             ServiceLocator.Get<EventManager>().Raise(GameEventType.ResourceChange);
         }
+
+        public void ReduceLife()
+        {
+            resouceData.life -= 1;
+            ServiceLocator.Get<EventManager>().Raise(GameEventType.ResourceChange);
+            if(resouceData.life <= 0)
+                ServiceLocator.Get<EventManager>().Raise(GameEventType.GameEnd);
+                
+        }
     }
 }

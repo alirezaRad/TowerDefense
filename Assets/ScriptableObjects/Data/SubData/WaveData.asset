@@ -12,5 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43165a1c8c84f43b21b9b2aeff336e6, type: 3}
   m_Name: WaveData
   m_EditorClassIdentifier: 
-  delayBetweenWaves: 3
-  subWaves: []
+  delayBetweenWaves: 30
+  subWaves:
+  - subWaveData:
+    - enemyType: 0
+      numberOfEnemies: 20
+      delayBetweenUnit: 0.3
+    - enemyType: 2
+      numberOfEnemies: 5
+      delayBetweenUnit: 3
+    delayBetweenSubWaves: 5
+  - subWaveData:
+    - enemyType: 0
+      numberOfEnemies: 10
+      delayBetweenUnit: 0.3
+    - enemyType: 2
+      numberOfEnemies: 10
+      delayBetweenUnit: 3
+    - enemyType: 1
+      numberOfEnemies: 5
+      delayBetweenUnit: 5
+    delayBetweenSubWaves: 3

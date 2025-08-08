@@ -12,5 +12,6 @@ namespace ScriptableObjects
         [Expandable] public ResourceData resourceData;
         [Expandable] public TowersData towersData;
         [Expandable] public WaveData waveData;
+        [Expandable] public EnemyData enemyData;
     }
 }
