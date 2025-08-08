@@ -44,6 +44,7 @@ namespace Service
                 temp.gameObject.SetActive(true);
                 temp.Init(item.sprite,item.price);
             }
+            ServiceLocator.Get<EventManager>().Raise(GameEventType.ResourceChange);
         }
 
         public void Load()

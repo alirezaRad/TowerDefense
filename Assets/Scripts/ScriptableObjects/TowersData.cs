@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Enums;
+using NaughtyAttributes;
 using UnityEngine;
 namespace ScriptableObjects
 {
@@ -12,6 +12,7 @@ namespace ScriptableObjects
     [System.Serializable]
     public struct TowerDataStruct
     {
+        [ShowAssetPreview]
         public Sprite sprite;
         public int price;
     }

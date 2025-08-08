@@ -1,4 +1,7 @@
 
+using System;
+using Enums;
+using Service;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,11 +12,30 @@ namespace UI
     {
         [SerializeField] private Image image;
         [SerializeField] private TextMeshProUGUI priceText;
+        private Button _thisButton;
+        private int _price;
+
+        private void Awake()
+        {
+            _thisButton = GetComponent<Button>();
+            _thisButton.interactable = false;
+            ServiceLocator.Get<EventManager>().Subscribe(GameEventType.ResourceChange,CheckForActivation);
+        }
         
+
         public void Init(Sprite sprite,int price)
         {
             image.sprite = sprite;
+            _price = price;
             priceText.text = price.ToString();
+        }
+
+        public void CheckForActivation()
+        {
+            if(ServiceLocator.Get<ResourceManager>().money >= _price)
+                _thisButton.interactable = true;
+            else
+                _thisButton.interactable = false;
         }
     }
 }
