@@ -25,6 +25,7 @@ Just find the ScriptableObject in the project, tweak values in the Inspector, an
 - State pattern to control game flow  
 - Object pooling for better performance  
 - ScriptableObjects for data-driven design  
+- Responsive UI — works on all mobile phones and tablets 
 and ...
 ---
 
