@@ -21,6 +21,9 @@ UserSettings/
 .DS_Store
 Thumbs.db
 
+# Ignore JetBrains IDE config folder
+.idea/
+
 # Developer Needs
 Assets/files/
 Assets/files.meta
