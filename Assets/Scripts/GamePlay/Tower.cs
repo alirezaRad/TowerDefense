@@ -20,9 +20,11 @@ namespace GamePlay
         private float _fireCountdown = 0f;
         private EnemySpawner _enemySpawner;
         private ObjectPool _objectPool;
+        private AudioManager _audioManager;
         private float _bulletSpeed;
         private int _damage;
         private Sprite _bulletSprite;
+        private AudioClipType _shootSound;
 
 
         private void Awake()
@@ -40,9 +42,11 @@ namespace GamePlay
             _delayBetweenShoot = towerData.delayBetweenShoot;
             _turnSpeed = towerData.turnSpeed;
             _objectPool = ServiceLocator.Get<ObjectPool>();
+            _audioManager = ServiceLocator.Get<AudioManager>();
             _damage = towerData.damage;
             _bulletSpeed = towerData.bulletSpeed;
             _bulletSprite = towerData.bulletSprite;
+            _shootSound = towerData.shootSound;
 
 
         }
@@ -103,6 +107,7 @@ namespace GamePlay
             bulletGo.transform.position = firePoint.position;
             Bullet bullet = bulletGo.GetComponent<Bullet>();
             bullet.Init(_target,_bulletSpeed,_damage,_bulletSprite);
+            _audioManager.PlaySfx(_shootSound);
             
         }
 

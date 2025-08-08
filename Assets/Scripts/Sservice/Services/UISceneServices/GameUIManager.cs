@@ -6,6 +6,9 @@ using Sservice;
 using TMPro;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Service
 {
@@ -14,14 +17,31 @@ namespace Service
         [SerializeField] private TextMeshProUGUI lifeText;
         [SerializeField] private TextMeshProUGUI moneyText;
         [SerializeField] private TowerBuildButton buildTowerButtonTemplate;
+        [SerializeField] private GameObject winOrLosePanel;
+        [SerializeField] private TextMeshProUGUI messageText;
+        
         
         public void Start()
         {
-            ServiceLocator.Get<EventManager>().Subscribe(GameEventType.RegisterGamePlayService,Register);
-            ServiceLocator.Get<EventManager>().Subscribe(GameEventType.GameStart,BuildTowerButtonsCreate);
-            ServiceLocator.Get<EventManager>().Subscribe(GameEventType.GameStart,UpdateResource);
-            ServiceLocator.Get<EventManager>().Subscribe(GameEventType.ResourceChange,UpdateResource);
+            var eventManager = ServiceLocator.Get<EventManager>();
+            eventManager.Subscribe(GameEventType.RegisterGamePlayService,Register);
+            eventManager.Subscribe(GameEventType.GameStart,BuildTowerButtonsCreate);
+            eventManager.Subscribe(GameEventType.GameStart,UpdateResource);
+            eventManager.Subscribe(GameEventType.ResourceChange,UpdateResource);
+            eventManager.Subscribe(GameEventType.ResourceChange,UpdateResource);
+            eventManager.Subscribe(GameEventType.GameWin,()=> { GameEnd("You Win!"); });
+            eventManager.Subscribe(GameEventType.GameOver,()=> {GameEnd("You Lose!"); });
         }
+        
+
+        private void GameEnd(string message)
+        {
+            Time.timeScale = 0;
+            winOrLosePanel.SetActive(true);
+            messageText.text = message;
+            messageText.gameObject.SetActive(true);
+        }
+        
 
         private void Register()
         {

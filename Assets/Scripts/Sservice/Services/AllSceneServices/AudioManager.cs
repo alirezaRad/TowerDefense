@@ -43,9 +43,12 @@ public class AudioManager : MonoBehaviour ,IService
     {
         if (_audioClips.TryGetValue(type, out var clip))
         {
-            musicSource.clip = clip;
-            musicSource.loop = loop;
-            musicSource.Play();
+            if (musicSource != null)
+            {
+                musicSource.clip = clip;
+                musicSource.loop = loop;
+                musicSource.Play();
+            }
         }
         else
         {

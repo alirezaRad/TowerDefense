@@ -15,7 +15,7 @@ namespace Service
         [HideInInspector]public WaveData waveData => entry.waveData;
         [HideInInspector]public EnemyData enemyData => entry.enemyData;
 
-
+        
         public void Load()
         {
         }

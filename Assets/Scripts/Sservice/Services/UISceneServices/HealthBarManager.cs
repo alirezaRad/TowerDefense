@@ -50,7 +50,7 @@ namespace Service{
             }
         }
 
-        public void CreateHealthBar(Transform target)
+        public void CreateHealthBar(Transform target,int maxHealth)
         {
             if (healthBars.ContainsKey(target)) return;
 
@@ -58,14 +58,15 @@ namespace Service{
             HealthBar bar = barGo.GetComponent<HealthBar>();
             healthBars.Add(target, bar);
             bar.transform.SetParent(uiCanvas.transform);
+            bar.Init(maxHealth);
         }
 
         public void RemoveHealthBar(Transform target)
         {
             if (healthBars.TryGetValue(target, out var bar))
             {
-                _objectPool.ReturnToPool(PoolObjectType.HeathBar,bar.gameObject);
                 healthBars.Remove(target);
+                _objectPool.ReturnToPool(PoolObjectType.HeathBar,bar.gameObject);
             }
         }
 

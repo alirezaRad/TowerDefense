@@ -4,7 +4,8 @@ namespace Enums
     {
         GameStart,
         ResourceChange,
-        GameEnd,
+        GameWin,
+        GameOver,
         RegisterGamePlayService,
         PlacementStart,
         PlacementEnd,

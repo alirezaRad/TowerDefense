@@ -24,6 +24,7 @@ namespace ScriptableObjects
         public Sprite bulletSprite;
         public int damage;
         public float bulletSpeed;
+        public AudioClipType shootSound;
     }
     
 }

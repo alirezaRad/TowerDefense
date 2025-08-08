@@ -15,7 +15,9 @@ namespace GamePlay
         private float _speed = 3f;
         private float _arriveThreshold = 0.2f;
         private int _health;
+        private int _givenMoneyOnDie;
         private SpriteRenderer _spriteRenderer;
+        private HealthBarManager _healthBarManager;
 
         private void Awake()
         {
@@ -58,18 +60,36 @@ namespace GamePlay
             }
         }
 
+        public void GetShot(int damage)
+        {
+            _health -= damage;
+            _health = Mathf.Clamp(_health, 0, int.MaxValue);
+            _healthBarManager.SetHealth(transform,_health);
+            if (_health <= 0)
+                Die();
+
+        }
+
+        private void Die()
+        {
+            ServiceLocator.Get<HealthBarManager>().RemoveHealthBar(transform);
+            ServiceLocator.Get<EnemySpawner>().RemoveEnemy(this,_givenMoneyOnDie);
+        }
+
         public void Init(EnemyType enemyType)
         {
-            ServiceLocator.Get<HealthBarManager>().CreateHealthBar(gameObject.transform);
+            _healthBarManager = ServiceLocator.Get<HealthBarManager>();
             
             var enemyData = ServiceLocator.Get<EnemyDataManger>().EnemyDataGetter
                 .FirstOrDefault(a => a.enemyType == enemyType);
-            
+
+            _givenMoneyOnDie = enemyData.givenMoneyAfterDeath;
             _health = enemyData.health;
             _speed = enemyData.speed;
             _spriteRenderer.sprite = enemyData.sprite;
             
             
+            _healthBarManager.CreateHealthBar(gameObject.transform,_health);
             _path = ServiceLocator.Get<WaveManager>().waypointPath;
             if (_path == null)
             {

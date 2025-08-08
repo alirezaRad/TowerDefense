@@ -38,6 +38,13 @@ namespace Service
         public void Load()
         {
         }
+
+        public void RemoveEnemy(Enemy enemy, int givenMoneyOnDie)
+        {
+            _enemies.Remove(enemy);
+            ServiceLocator.Get<ResourceManager>().IncreaseMoney(givenMoneyOnDie);
+            ServiceLocator.Get<ObjectPool>().ReturnToPool(PoolObjectType.Enemy, enemy.gameObject);
+        }
     }
 }
 

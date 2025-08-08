@@ -52,13 +52,15 @@ namespace GamePlay
         {
             Vector3 dir = _target.position - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            angle -= 90f; // because default sprite faces up instead of right
+            angle -= 90f; 
             Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = rot;
         }
 
         void HitTarget()
         {
+            if(_target != null && _target.gameObject.activeInHierarchy)
+                _target.GetComponent<Enemy>().GetShot(_damage);
             ServiceLocator.Get<ObjectPool>().ReturnToPool(PoolObjectType.Bullet,gameObject);
         }
     }

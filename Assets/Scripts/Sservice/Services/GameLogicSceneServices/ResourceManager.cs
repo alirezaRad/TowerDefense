@@ -8,13 +8,23 @@ namespace Service
 {
     public class ResourceManager : MonoBehaviour,IService
     {
-        public int life { get { return resouceData.life; }}
-        public int money { get { return resouceData.money; }}
+        public int life
+        {
+            get { return _life; }
+        }
+        public int money
+        {
+            get { return _money; }
+        }
+
+        private int _life;
+        private int _money;
         
         private ResourceData resouceData => ServiceLocator.Get<ScriptableObjectsFacade>().resourceData;
         public void Start()
         {
             ServiceLocator.Get<EventManager>().Subscribe(GameEventType.RegisterGamePlayService,Register);
+            ServiceLocator.Get<EventManager>().Subscribe(GameEventType.RegisterGamePlayService,Load);
         }
 
         private void Register()
@@ -24,13 +34,15 @@ namespace Service
         
         public void Load()
         {
+            _life = resouceData.life;
+            _money = resouceData.money;
         }
         
 
 
         public void ReduceTowerMoney(TowerType towerType)
         {
-            resouceData.money -= ServiceLocator.Get<TowersDataManager>().TowersDataGetter
+            _money -= ServiceLocator.Get<TowersDataManager>().TowersDataGetter
                 .FirstOrDefault(t => t.towerType == towerType).price;
             
             ServiceLocator.Get<EventManager>().Raise(GameEventType.ResourceChange);
@@ -38,11 +50,17 @@ namespace Service
 
         public void ReduceLife()
         {
-            resouceData.life -= 1;
+            _life -= 1;
             ServiceLocator.Get<EventManager>().Raise(GameEventType.ResourceChange);
-            if(resouceData.life <= 0)
-                ServiceLocator.Get<EventManager>().Raise(GameEventType.GameEnd);
+            if(_life <= 0)
+                ServiceLocator.Get<EventManager>().Raise(GameEventType.GameOver);
                 
+        }
+
+        public void IncreaseMoney(int givenMoneyOnDie)
+        {
+            _money += givenMoneyOnDie;
+            ServiceLocator.Get<EventManager>().Raise(GameEventType.ResourceChange);
         }
     }
 }
