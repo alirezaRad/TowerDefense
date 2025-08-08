@@ -2890,7 +2890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7306ac782249487c9cb5f528d98ff2c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _points:
+  points:
   - {fileID: 1770605991}
   - {fileID: 74317980}
   - {fileID: 1073397443}
