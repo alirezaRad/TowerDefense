@@ -49,7 +49,7 @@ namespace GamePlay
             _bulletSprite = towerData.bulletSprite;
             _shootSound = towerData.shootSound;
             var waypointPath = ServiceLocator.Get<WaveManager>().waypointPath;
-            _basePosition = waypointPath.GetPoint(waypointPath.Count - 1).position;
+            _basePosition = waypointPath.GetPoint(waypointPath.count - 1).position;
 
 
         }

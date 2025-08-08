@@ -26,7 +26,7 @@ namespace GamePlay
 
         void Update()
         {
-            if (_path.Count == 0) return;
+            if (_path.count == 0) return;
 
             Transform target = _path.GetPoint(_currentIndex);
             if (target == null) return;
@@ -48,9 +48,9 @@ namespace GamePlay
             // Check arrival
             if (Vector3.Distance(transform.position, targetPos) <= _arriveThreshold)
             {
-                if (_path.Count == 0) return;
+                if (_path.count == 0) return;
                 _currentIndex += 1;
-                if (_currentIndex >= _path.Count)
+                if (_currentIndex >= _path.count)
                 {
                     //reduce Life
                     ServiceLocator.Get<ResourceManager>().ReduceLife();

@@ -21,7 +21,7 @@ namespace GamePlay
             ServiceLocator.Get<WaveManager>().RegisterWaypointPath(this);
         }
 
-        public int Count => _points != null ? _points.Length : 0;
+        public int count => _points != null ? _points.Length : 0;
         
         [SerializeField] private Transform[] _points;
         [SerializeField] private bool showGizmos = true;
