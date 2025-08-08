@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d821f0df692498eb972759003fee84a, type: 3}
+  m_Name: ScriptableObjectEntry
+  m_EditorClassIdentifier: 
+  audioClipData: {fileID: 11400000, guid: fa7f9352b118c2742a972aeaa92b20fa, type: 2}
+  objectPoolPool: {fileID: 11400000, guid: 02a159d3eaac3864e94f31fff5d98e0a, type: 2}
+  resourceData: {fileID: 11400000, guid: 51c956eac0fa8484bb99a75d331813ed, type: 2}
+  towersData: {fileID: 11400000, guid: 8d93c01e880e48b42aed9f7e9c35ca92, type: 2}
+  waveData: {fileID: 11400000, guid: 4da9a8a89bd585746a840427983bd8ea, type: 2}

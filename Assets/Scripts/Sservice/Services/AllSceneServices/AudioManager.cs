@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Enums;
 using ScriptableObjects;
+using Service;
 using Sservice;
 
 public class AudioManager : MonoBehaviour ,IService 
@@ -9,7 +10,7 @@ public class AudioManager : MonoBehaviour ,IService
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
 
-    [SerializeField] private AudioClipsData audioClipData;
+    private AudioClipsData audioClipData => ServiceLocator.Get<ScriptableObjectsFacade>().audioClipData;
 
     private Dictionary<AudioClipType, AudioClip> _audioClips;
     

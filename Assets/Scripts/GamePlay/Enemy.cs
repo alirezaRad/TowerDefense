@@ -1,0 +1,65 @@
+using System.Collections;
+using Service;
+using UnityEngine;
+
+namespace GamePlay
+{ 
+    public class Enemy : MonoBehaviour 
+    {
+        private WaypointPath _path;
+        
+        private int _currentIndex = 0;
+        private float _speed = 3f;
+        private float _arriveThreshold = 0.2f;
+
+        void Start()
+        {
+            _path = ServiceLocator.Get<WaveManager>().waypointPath;
+            if (_path == null)
+            {
+                Debug.LogError("Enemy: No WaypointPath assigned.");
+                enabled = false;
+                return;
+            }
+            
+            _currentIndex = 0;
+            var startPoint = _path.GetPoint(_currentIndex);
+            if (startPoint != null)
+                transform.position = startPoint.position;
+        }
+
+        void Update()
+        {
+            if (_path.Count == 0) return;
+
+            Transform target = _path.GetPoint(_currentIndex);
+            if (target == null) return;
+
+            //Move
+            Vector3 pos = transform.position;
+            Vector3 targetPos = target.position;
+            Vector3 newPos = Vector3.MoveTowards(pos, targetPos, _speed * Time.deltaTime);
+            transform.position = newPos;
+
+            //rotate
+            Vector3 dir = targetPos - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward); 
+            transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
+
+            
+
+            // Check arrival
+            if (Vector3.Distance(transform.position, targetPos) <= _arriveThreshold)
+            {
+                if (_path.Count == 0) return;
+                _currentIndex += 1;
+                if (_currentIndex >= _path.Count)
+                {
+                    //reduce Life
+                    Destroy(this.gameObject);
+                }
+            }
+        }
+    }
+}

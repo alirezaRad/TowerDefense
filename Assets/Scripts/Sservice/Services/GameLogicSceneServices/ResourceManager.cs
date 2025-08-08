@@ -11,7 +11,7 @@ namespace Service
         public int life { get { return resouceData.life; }}
         public int money { get { return resouceData.money; }}
         
-        [SerializeField] private ResourceData resouceData;
+        private ResourceData resouceData => ServiceLocator.Get<ScriptableObjectsFacade>().resourceData;
         public void Start()
         {
             ServiceLocator.Get<EventManager>().Subscribe(GameEventType.RegisterGamePlayService,Register);

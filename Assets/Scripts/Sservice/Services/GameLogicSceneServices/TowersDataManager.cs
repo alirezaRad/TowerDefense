@@ -8,7 +8,7 @@ namespace Service
 {
     public class TowersDataManager: MonoBehaviour,IService
     {
-        [SerializeField] private TowersData towersData;
+        private TowersData towersData => ServiceLocator.Get<ScriptableObjectsFacade>().towersData;
         public void Start()
         {
             ServiceLocator.Get<EventManager>().Subscribe(GameEventType.RegisterGamePlayService,Register);

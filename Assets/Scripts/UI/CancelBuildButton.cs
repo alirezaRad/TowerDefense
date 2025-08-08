@@ -15,6 +15,7 @@ namespace UI
             _thisButton = gameObject.GetComponent<Button>();
             _thisButton.onClick.AddListener((() =>
             {
+                ServiceLocator.Get<AudioManager>().PlaySfx(AudioClipType.ButtonClick);
                 ServiceLocator.Get<PlacementManager>().PlacementCancel();
             }));
         }

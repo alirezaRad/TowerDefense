@@ -24,6 +24,7 @@ namespace GamePlay
         {
             if (ServiceLocator.Get<PlacementManager>().PlacementState == PlacementState.Placing)
             {
+                ServiceLocator.Get<AudioManager>().PlaySfx(AudioClipType.ButtonClick);
                 _isEmpty = false;
                 ServiceLocator.Get<PlacementManager>().PlacementEnd(transform);
             }

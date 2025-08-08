@@ -11,7 +11,7 @@ namespace Service
 
     public class ObjectPool : MonoBehaviour,IService
     {
-        [FormerlySerializedAs("config")] public PooledObjectData data;
+        private ObjectPoolData poolData => ServiceLocator.Get<ScriptableObjectsFacade>().objectPoolPool;
   
         private readonly Dictionary<PoolObjectType, Queue<GameObject>> _poolDictionary = new();
         private readonly Dictionary<PoolObjectType, Transform> _parentDictionary = new();
@@ -24,7 +24,7 @@ namespace Service
 
         private void CreatePool()
         {
-            foreach (var item in data.items)
+            foreach (var item in poolData.items)
             {
                 if (!_parentDictionary.ContainsKey(item.key))
                 {
@@ -55,7 +55,7 @@ namespace Service
             }
 
             GameObject obj;
-            obj = _poolDictionary[key].Count > 0 ? _poolDictionary[key].Dequeue() : Instantiate(data.items.Find(x => x.key == key).prefab, _parentDictionary[key]);
+            obj = _poolDictionary[key].Count > 0 ? _poolDictionary[key].Dequeue() : Instantiate(poolData.items.Find(x => x.key == key).prefab, _parentDictionary[key]);
 
             obj.transform.SetParent(null);
             obj.SetActive(true);
